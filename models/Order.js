@@ -13,6 +13,14 @@ const OrderSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    description: {
+        type: String,
+        required: false
+    },
+    creationDate: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 module.exports = mongoose.model('Producto', OrderSchema)
