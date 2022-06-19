@@ -5,7 +5,7 @@ exports.createOrder = async (req, res) => {
         let order;
         order = new Order(req.body);
         await order.save();
-        res.send(order);
+        res.send(order)
     }
     catch (err) {
         console.log(err);
@@ -16,7 +16,7 @@ exports.createOrder = async (req, res) => {
 exports.getOrders = async (req, res) => {
     try {
         const orders = await Order.find();
-        res.json(orders);
+        res.json(orders.sort((a, b) => b.date - a.date));
     }
     catch (err) {
         console.log(err);

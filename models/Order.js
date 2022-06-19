@@ -15,11 +15,11 @@ const OrderSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        required: false
+        required: true
     },
     creationDate: {
         type: Date,
-        default: Date.now()
+        default: new Date().toJSON().slice(0,10).replace(/-/g,'/')
     }
 })
 
