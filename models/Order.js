@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const index = 1;
-
 const OrderSchema = mongoose.Schema({
     clientData: {
         type: Object,
@@ -15,10 +13,15 @@ const OrderSchema = mongoose.Schema({
         type: Object,
         required: true
     },
-    creationDate: {
-        type: Date,
-        default: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+    position:{
+        type: String,
+        index: true
     }
-})
+},
+    {
+        versionKey: false,
+    }
+);
 
-module.exports = mongoose.model('Producto', OrderSchema)
+var fieldGorup = mongoose.model('Orders', OrderSchema);
+module.exports = fieldGorup;
