@@ -15,7 +15,7 @@ exports.createOrder = async (req, res) => {
 
 exports.getOrders = async (req, res) => {
     try {
-        const orders = await Order.find();
+        const orders = await Order.find().sort({creationDate: -1})
         res.json(orders);
     }
     catch (err) {

@@ -13,9 +13,9 @@ const OrderSchema = mongoose.Schema({
         type: Object,
         required: true
     },
-    position:{
-        type: String,
-        index: true
+    creationDate: {
+        type: Date,
+        default: Date.now()
     }
 },
     {
