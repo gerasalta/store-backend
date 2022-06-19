@@ -16,9 +16,7 @@ exports.createOrder = async (req, res) => {
 exports.getOrders = async (req, res) => {
     try {
         const orders = await Order.find();
-        res.json(orders(function(a,b){
-            return new Date(b.date) - new Date(a.date);
-          }));
+        res.json(orders);
     }
     catch (err) {
         console.log(err);

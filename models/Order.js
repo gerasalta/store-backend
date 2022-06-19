@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const index = 1;
+
 const OrderSchema = mongoose.Schema({
     clientData: {
         type: Object,
@@ -11,10 +13,6 @@ const OrderSchema = mongoose.Schema({
     },
     balanceData: {
         type: Object,
-        required: true
-    },
-    description: {
-        type: String,
         required: true
     },
     creationDate: {
