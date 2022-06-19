@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const OrderSchema = mongoose.Schema({
     clientData: {
@@ -23,5 +24,5 @@ const OrderSchema = mongoose.Schema({
     }
 );
 
-var fieldGorup = mongoose.model('Orders', OrderSchema);
-module.exports = fieldGorup;
+OrderSchema.plugin(mongoosePaginate);
+module.exports = mongoose.model('Orders', OrderSchema);

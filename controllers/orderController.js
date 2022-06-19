@@ -1,9 +1,18 @@
-const Order = require("../models/Order");
+const Collection = require("../models/Order");
+
+const options = {
+    page: 1,
+    limit: 5,
+    sort: {creationDate: -1},
+    collation: {
+      locale: 'en',
+    },
+  };
 
 exports.createOrder = async (req, res) => {
     try {
         let order;
-        order = new Order(req.body);
+        order = new Collection(req.body);
         await order.save();
         res.send('New Order Created')
     }
@@ -15,7 +24,7 @@ exports.createOrder = async (req, res) => {
 
 exports.getOrders = async (req, res) => {
     try {
-        const orders = await Order.find().sort({creationDate: -1})
+        const orders = await Collection.paginate({},options);
         res.json(orders);
     }
     catch (err) {
@@ -26,11 +35,11 @@ exports.getOrders = async (req, res) => {
 
 exports.deleteOrder = async (req, res) => {
     try {
-        let order = await Order.findById(req.params.id);
-        if (!Order) {
+        let order = await Collection.findById(req.params.id);
+        if (!Collection) {
             res.status(404).json({ msg: 'invalid order' });
         };
-        await Order.findOneAndRemove({ _id: req.params.id });
+        await Collection.findOneAndRemove({ _id: req.params.id });
         res.json({ msg: 'Order Deleted' });
     }
     catch (err) {
