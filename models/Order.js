@@ -15,7 +15,7 @@ const OrderSchema = mongoose.Schema({
     },
     description: {
         type: String,
-        required: false
+        required: true
     },
     creationDate: {
         type: Date,

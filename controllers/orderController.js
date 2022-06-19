@@ -16,7 +16,7 @@ exports.createOrder = async (req, res) => {
 exports.getOrders = async (req, res) => {
     try {
         const orders = await Order.find();
-        res.json(orders);
+        res.json(orders.sort((a,b)=>a.getTime()-b.getTime()));
     }
     catch (err) {
         console.log(err);
