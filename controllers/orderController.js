@@ -5,7 +5,7 @@ exports.createOrder = async (req, res) => {
         let order;
         order = new Order(req.body);
         await order.save();
-        res.send(order)
+        res.send(order);
     }
     catch (err) {
         console.log(err);
