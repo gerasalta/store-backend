@@ -1,14 +1,5 @@
 const Collection = require("../models/Order");
 
-const options = {
-    page: 1,
-    limit: 5,
-    sort: {creationDate: -1},
-    collation: {
-      locale: 'en',
-    },
-  };
-
 exports.createOrder = async (req, res) => {
     try {
         let order;
@@ -23,9 +14,20 @@ exports.createOrder = async (req, res) => {
 }
 
 exports.getOrders = async (req, res) => {
+    const reqPage = req.query.page || 1;
+    const reqLimit = req.query.limit || 5;
+    const options = {
+        page: reqPage,
+        limit: reqLimit,
+        sort: { creationDate: -1 },
+        collation: {
+            locale: 'en',
+        },
+    };
     try {
-        const orders = await Collection.paginate({},options);
+        const orders = await Collection.paginate({}, options);
         res.json(orders);
+        console.log(req.query);
     }
     catch (err) {
         console.log(err);
