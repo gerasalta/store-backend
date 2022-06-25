@@ -40,8 +40,8 @@ exports.getOrders = async (req, res) => {
         res.json(docs);
     }
     catch (err) {
-        res.status(500).send('Can not Get Hola 2');
-    }
+        res.status(500).send('Can not Get');
+        }
 };
 
 exports.deleteOrder = async (req, res) => {
