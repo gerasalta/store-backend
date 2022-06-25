@@ -22,7 +22,7 @@ exports.getOrders = async (req, res) => {
     let hasPrevPage = false;
     try {
         const orders = await Collection
-        .find({$text: {$search: keyword}})
+        .find()
         .sort({creationDate: -1})
         .limit(limit)
         .skip(page * limit - limit);
