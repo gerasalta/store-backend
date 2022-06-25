@@ -2,42 +2,51 @@ const Collection = require("../models/Order");
 
 exports.createOrder = async (req, res) => {
     try {
-        let order;
-        order = new Collection(req.body);
+        let order = new Collection(req.body);
         await order.save();
         res.send('New Order Created')
     }
     catch (err) {
         console.log(err);
-        res.status(500).send('Error 500')
+        res.status(500).send('Error Post')
     }
 }
 
 exports.getOrders = async (req, res) => {
-    const reqPage = req.query.page || 1;
-    const reqLimit = req.query.limit || 5;
-    const options = {
-        page: reqPage,
-        limit: reqLimit,
-        sort: { creationDate: -1 },
-        collation: {
-            locale: 'en',
-        },
-    };
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+    const totalDocs = (await Collection.find()).length;
+    const totalPages = Math.ceil( totalDocs / limit);
+    const keyword = req.query.keyword;
+    const hasNextPage = false;
+    const hasPrevPage = false;
     try {
-        const orders = await Collection.paginate({}, options);
-        res.json(orders);
-        console.log(req.query);
+        const orders = await Collection
+        .find({$text: {$search: keyword}})
+        .sort({creationDate: -1})
+        .limit(limit)
+        .skip(page * limit - limit);
+    page >= totalPages ? hasNextPage = false : hasNextPage = true;
+    page <= 1 ? hasPrevPage = false : hasPrevPage = true;
+    const docs = {
+        docs: orders,
+        limit: limit,
+        page: page,
+        totalDocs: totalDocs,
+        totalPages: totalPages,
+        hasNextPage: hasNextPage,
+        hasPrevPage: hasPrevPage,
+    }
+        res.json(docs);
     }
     catch (err) {
-        console.log(err);
-        res.status(500).send('Error 500')
+        res.status(500).send('Error Get');
     }
-}
+};
 
 exports.deleteOrder = async (req, res) => {
     try {
-        let order = await Collection.findById(req.params.id);
+        const order = await Collection.findById(req.params.id);
         if (!Collection) {
             res.status(404).json({ msg: 'invalid order' });
         };
@@ -45,6 +54,6 @@ exports.deleteOrder = async (req, res) => {
         res.json({ msg: 'Order Deleted' });
     }
     catch (err) {
-        res.status(500).send('Error');
+        res.status(500).send('Error Delete');
     }
 }

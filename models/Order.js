@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2')
 
 const OrderSchema = mongoose.Schema({
     clientData: {
         type: Object,
-        required: true
+        required: true,
+          profile: {
+    something: String,
+    somethingElse: String
+  }
     },
     orderData: {
         type: Object,
@@ -24,5 +27,4 @@ const OrderSchema = mongoose.Schema({
     }
 );
 
-OrderSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Orders', OrderSchema);
