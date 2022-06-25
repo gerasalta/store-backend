@@ -18,8 +18,8 @@ exports.getOrders = async (req, res) => {
     const totalDocs = (await Collection.find()).length;
     const totalPages = Math.ceil( totalDocs / limit);
     const keyword = req.query.keyword;
-    const hasNextPage = false;
-    const hasPrevPage = false;
+    let hasNextPage = false;
+    let hasPrevPage = false;
     try {
         const orders = await Collection
         .find({$text: {$search: keyword}})
