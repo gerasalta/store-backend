@@ -18,11 +18,19 @@ exports.getOrders = async (req, res) => {
     const totalDocs = (await Collection.find()).length;
     const totalPages = Math.ceil( totalDocs / limit);
     const keyword = req.query.keyword;
+    let keywordOpt = {$text: {$search: keyword}}
     let hasNextPage = false;
     let hasPrevPage = false;
     try {
+        if(keyword){
+            keywordOpt = {$text: {$search: keyword}};
+        }
+        else{
+            keywordOpt = {};
+            console.log('no keyword');
+        }
         const orders = await Collection
-        .find()
+        .find(keywordOpt)
         .sort({creationDate: -1})
         .limit(limit)
         .skip(page * limit - limit);
