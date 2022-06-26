@@ -16,14 +16,11 @@ const OrderSchema = mongoose.Schema({
     balanceData: {
         type: Object,
         required: true
-    },
-    creationDate: {
-        type: Date,
-        default: Date.now()
     }
 },
     {
         versionKey: false,
+        timestamps: true
     }
 );
 

@@ -27,11 +27,10 @@ exports.getOrders = async (req, res) => {
         }
         else{
             keywordOpt = {};
-            console.log('no keyword');
         }
         const orders = await Collection
         .find(keywordOpt)
-        .sort({creationDate: -1})
+        .sort({createdAt: 1})
         .limit(limit)
         .skip(page * limit - limit);
     page >= totalPages ? hasNextPage = false : hasNextPage = true;
