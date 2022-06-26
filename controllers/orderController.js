@@ -30,7 +30,7 @@ exports.getOrders = async (req, res) => {
         }
         const orders = await Collection
         .find(keywordOpt)
-        .sort({createdAt: 1})
+        .sort({createdAt: -1})
         .limit(limit)
         .skip(page * limit - limit);
     page >= totalPages ? hasNextPage = false : hasNextPage = true;
