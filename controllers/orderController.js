@@ -69,7 +69,7 @@ exports.deleteOrder = async (req, res) => {
 exports.getPrices = async (req, res) => {
     try{
         const prices = await pricesCollection.find();
-        res.status(200).json(prices);
+        res.status(200).json(prices[0]);
     }
     catch(err){
         res.status(404).json({msg: 'getPrices Error'});
@@ -79,6 +79,9 @@ exports.getPrices = async (req, res) => {
 exports.putPrices = async (req, res) => {
 
     try{
+        const material = req.query.material
+        const service = req.query.service
+        const newPrice = req.query.newPrice
         const prices = await pricesCollection.find();
     }
 
