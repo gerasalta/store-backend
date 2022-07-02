@@ -13,7 +13,8 @@ app.use(cors());
 connectDB();
 
 app.use(express.json());
-app.use('/api/orders', require('./routes/orders'));
+app.use('/api', require('./routes/orders'));
+
 
 //Princial Route
 

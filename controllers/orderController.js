@@ -1,4 +1,5 @@
 const Collection = require("../models/Order");
+const pricesCollection = require("../models/Prices");
 
 exports.createOrder = async (req, res) => {
     try {
@@ -8,7 +9,7 @@ exports.createOrder = async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).send('Error Post')
+        res.status(404).send('Error Post')
     }
 }
 
@@ -44,10 +45,10 @@ exports.getOrders = async (req, res) => {
         hasNextPage: hasNextPage,
         hasPrevPage: hasPrevPage,
     }
-        res.json(docs);
+        res.status(200).json(docs);
     }
     catch (err) {
-        res.status(500).send('Can not Get');
+        res.status(404).send('Can not Get');
         }
 };
 
@@ -61,6 +62,27 @@ exports.deleteOrder = async (req, res) => {
         res.json({ msg: 'Order Deleted' });
     }
     catch (err) {
-        res.status(500).send('Error Delete');
+        res.status(404).send('Error Delete');
+    }
+}
+
+exports.getPrices = async (req, res) => {
+    try{
+        const prices = await pricesCollection.find();
+        res.status(200).json(prices);
+    }
+    catch(err){
+        res.status(404).json({msg: 'getPrices Error'});
+    }
+};
+
+exports.putPrices = async (req, res) => {
+
+    try{
+        const prices = await pricesCollection.find();
+    }
+
+    catch(err){
+        res.status(404).json({msg: 'can not update price'})
     }
 }
