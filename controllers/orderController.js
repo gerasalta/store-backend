@@ -79,10 +79,9 @@ exports.getPrices = async (req, res) => {
 exports.putPrices = async (req, res) => {
 
     try{
-        const material = req.query.material
-        const service = req.query.service
-        const newPrice = req.query.newPrice
-        const prices = await pricesCollection.find();
+        const updatePack = req.body;
+        const prices = await pricesCollection.findOneAndUpdate({}, updatePack, {new: true});
+        res.status(200).json(prices)
     }
 
     catch(err){
