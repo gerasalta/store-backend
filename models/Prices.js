@@ -1,12 +1,20 @@
 const mongoose = require('mongoose');
-
 const PricesSchema = mongoose.Schema({
-    price: {
+    vinyl: {
         type: Object,
         require: true
-    }
-}, {
-    _id: false
+    },
+    banner: {
+        type: Object,
+        require: true
+    },
+    light: {
+        type: Object,
+        require: true
+    },
+    polyfan: {
+        type: Object,
+        require: true
+    },
 });
-
 module.exports = mongoose.model('price', PricesSchema);

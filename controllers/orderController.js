@@ -77,10 +77,11 @@ exports.getPrices = async (req, res) => {
 };
 
 exports.putPrices = async (req, res) => {
-    try {
+    try{
         const updatePack = req.body;
-        const prices = await pricesCollection.findOneAndUpdate({}, updatePack, { new: true });
-        res.status(200).json(prices)}
+        const prices = await pricesCollection.findOneAndUpdate({}, updatePack, {new: true});
+        res.status(200).json(prices)
+    }
 
     catch (err) {
         res.status(404).json({ msg: 'can not update price' })
