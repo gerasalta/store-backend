@@ -6,10 +6,9 @@ exports.createOrder = async (req, res) => {
     try {
         let order = new Collection(req.body);
         await order.save();
-        res.send('New Order Created')
+        res.status(200).json({msg: 'New Order has been created'})
     }
     catch (err) {
-        // console.log(err);
         res.status(404).send('Error Post')
     }
 }
