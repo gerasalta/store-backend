@@ -14,6 +14,7 @@ router.put('/prices', orderController.putPrices);
 
 // DEBTORS
 
-router.put('/debtors', orderController.putDebtors)
+router.put('/debtors', orderController.putDebtors);
+router.get('/debtors', orderController.getDebtors);
 
 module.exports = router;

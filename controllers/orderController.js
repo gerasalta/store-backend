@@ -93,6 +93,7 @@ exports.putPrices = async (req, res) => {
 }
 
 exports.putDebtors = async (req, res) => {
+
     try{
         const debtor = new debtorsCollection(req.body)
         await debtor.save()
@@ -101,4 +102,17 @@ exports.putDebtors = async (req, res) => {
     catch(err){
         res.status(404).json({msg: 'error'})
     }
+
+}
+
+exports.getDebtors = async (req, res) => {
+
+    try{
+        const debtors = await debtorsCollection.find();
+        res.status(200).send(debtors)
+    }
+    catch(err){
+        res.status(404).json({msg: 'error'})
+    }
+
 }
