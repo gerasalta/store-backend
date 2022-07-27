@@ -1,5 +1,6 @@
 const Collection = require("../models/Order");
 const pricesCollection = require("../models/Prices");
+const debtorsCollection = require("../models/Debtors");
 
 exports.createOrder = async (req, res) => {
     try {
@@ -18,6 +19,7 @@ exports.getOrders = async (req, res) => {
     const limit = req.query.limit || 10;
     const totalDocs = (await Collection.find()).length;
     const totalPages = Math.ceil( totalDocs / limit);
+    let totalResults = 0;
     const keyword = req.query.keyword;
     let keywordOpt = {$text: {$search: keyword}}
     let hasNextPage = false;
@@ -41,6 +43,7 @@ exports.getOrders = async (req, res) => {
         limit: limit,
         page: page,
         totalDocs: totalDocs,
+        totalResults: totalResults,
         totalPages: totalPages,
         hasNextPage: hasNextPage,
         hasPrevPage: hasPrevPage,
@@ -85,5 +88,17 @@ exports.putPrices = async (req, res) => {
 
     catch (err) {
         res.status(404).json({ msg: 'can not update price' })
+    }
+    
+}
+
+exports.putDebtors = async (req, res) => {
+    try{
+        const debtor = new debtorsCollection(req.body)
+        await debtor.save()
+        res.status(200).send(debtor)
+    }
+    catch(err){
+        res.status(404).json({msg: 'error'})
     }
 }

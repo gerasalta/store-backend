@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const PricesSchema = mongoose.Schema({
     vinyl: {
         type: Object,

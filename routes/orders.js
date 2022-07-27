@@ -12,5 +12,8 @@ router.delete('/orders/:id', orderController.deleteOrder);
 router.get('/prices', orderController.getPrices);
 router.put('/prices', orderController.putPrices);
 
+// DEBTORS
+
+router.put('/debtors', orderController.putDebtors)
 
 module.exports = router;
