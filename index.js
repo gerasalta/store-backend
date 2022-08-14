@@ -1,4 +1,3 @@
-const { json } = require('express');
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
@@ -13,7 +12,7 @@ app.use(cors());
 connectDB();
 
 app.use(express.json());
-app.use('/api', require('./routes/orders'));
+app.use('/api', require('./routes/products'));
 
 
 //Princial Route
