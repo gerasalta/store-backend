@@ -3,7 +3,7 @@ const Product = require("../models/products");
 exports.getProducts = async (req, res) => {
     try {
         const data = await Product.find()
-        res.status(200).send(data)
+        res.status(200).send(data) 
     }
     catch (err) {
         res.status(404).json({msg: "sorry, cant get these products", err: err})
