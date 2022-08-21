@@ -1,8 +1,9 @@
 const Product = require("../models/products");
+const paginate = require('mongoose-paginate-v2');
 
 exports.getProducts = async (req, res) => {
     try {
-        const data = await Product.find()
+        const data = await Product.paginate()
         res.status(200).send(data) 
     }
     catch (err) {
