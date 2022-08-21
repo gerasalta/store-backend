@@ -1,16 +1,6 @@
 const Product = require("../models/products");
 const paginate = require('mongoose-paginate-v2');
 
-exports.getProducts = async (req, res) => {
-    try {
-        const data = await Product.paginate()
-        res.status(200).send(data) 
-    }
-    catch (err) {
-        res.status(404).json({msg: "sorry, cant get these products", err: err})
-    }
-}
-
 exports.postProduct = async (req, res) => {
     try{
         let product = new Product(req.body)
@@ -18,7 +8,17 @@ exports.postProduct = async (req, res) => {
         res.status(200).json({msg: "product created successfully"})
     }
     catch(err){
-        res.status(404).json({msg:"sorry, cant create this item"})
+        res.status(404).json({msg:"sorry, cant create this item", error: err})
+    }
+}
+
+exports.getProducts = async (req, res) => {
+    try {
+        const data = await Product.paginate()
+        res.status(200).send(data) 
+    }
+    catch (err) {
+        res.status(404).json({msg: "sorry, cant get these products", err: err})
     }
 }
 

@@ -2,11 +2,24 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const ProductsSchema = mongoose.Schema({
-    product: { type: String, require: true },
-    description: { type: String, require: false },
-    image: {type: String, require: true},
-    stock: {type: Number, require: true},
-    disponibility:{type: Boolean, require: true}
+    title: { 
+        type: String,
+        required: [true, 'Campo obligatorio'],
+        minLength: [3, 'El titulo es muy corto']
+     },
+    description: { 
+        type: String,
+        required: [false],
+        default: 'Descripción no disponible'
+    },
+    image: {
+        type: String,
+        required: false,
+    },
+    stock: {
+        type: Number,
+        required: true
+    }
 },
     {
         versionKey: false,
