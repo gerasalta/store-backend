@@ -23,8 +23,8 @@ exports.getCategories = async (req, res) => {
 
 exports.deleteCategories = async (req, res) => {
     try{
-        id = req.body._id
-        await Categories.findByIdAndDelete('6302dbd34e3f61f51e490831')
+        id = req.query.id
+        await Categories.findByIdAndDelete(id)
         res.status(200).json({msg: "category removed successfully"})
     }
     catch(err){
