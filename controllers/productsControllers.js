@@ -25,7 +25,7 @@ exports.getProducts = async (req, res) => {
 exports.deleteProducts = async (req, res) => {
     try{
         id = req.body._id
-        await Product.findOneAndDelete(id)
+        await Product.findByIdAndDelete(id)
         res.status(200).json({msg: "product removed successfully"})
     }
     catch(err){
@@ -38,7 +38,7 @@ exports.putProducts = async (req, res) => {
         id = req.body._id
         patch = req.body
         await Product.findByIdAndUpdate(id, patch)
-        res.status(200).json({msg: "product created successfully"})
+        res.status(200).json({msg: "product updated successfully"})
     }
     catch(err){
         res.status(404).json({msg: "sorry, cant update this item", err: err})
