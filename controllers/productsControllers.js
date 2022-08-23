@@ -24,7 +24,7 @@ exports.getProducts = async (req, res) => {
 
 exports.deleteProducts = async (req, res) => {
     try{
-        id = req.body._id
+        id = req.query.id
         await Product.findByIdAndDelete(id)
         res.status(200).json({msg: "product removed successfully"})
     }
