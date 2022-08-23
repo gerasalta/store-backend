@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
+const CategorySchema = mongoose.Schema({
+        name: {
+            type: String,
+            required: true
+        },
+        _id: {
+            type: String,
+            required: true
+        }
+})
+
 const ProductsSchema = mongoose.Schema({
     title: { 
         type: String,
@@ -20,6 +31,10 @@ const ProductsSchema = mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    category:{
+        type: CategorySchema,
+        required: true,
     }
 },
     {
