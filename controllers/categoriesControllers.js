@@ -1,5 +1,6 @@
 const Categories = require("../models/categories");
 const Products = require("../models/products");
+const { patch } = require("../routes/products");
 
 exports.postCategories = async (req, res) => {
     try{
@@ -36,9 +37,10 @@ exports.deleteCategories = async (req, res) => {
 
 exports.putCategories = async (req, res) => {
     try{
-        id = req.body._id
-        patch = req.body
-        await Categories.findByIdAndUpdate(id, patch)
+        id = req.query.id
+        newName = req.body
+        await Categories.findByIdAndUpdate(id, newName)
+        await Products.updateMany({'category._id': id}, {"category": newName})
         res.status(200).json({msg:"category updated successfully"})
     }
     catch(err){
