@@ -40,7 +40,7 @@ exports.putCategories = async (req, res) => {
         id = req.query.id
         newName = req.body
         await Categories.findByIdAndUpdate(id, newName)
-        await Products.updateMany({'category._id': id}, {"category": newName})
+        await Products.updateMany({'category._id': id}, {"category": newName, "_id": id})
         res.status(200).json({msg:"category updated successfully"})
     }
     catch(err){
