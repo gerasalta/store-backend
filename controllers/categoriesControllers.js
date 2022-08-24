@@ -1,4 +1,5 @@
 const Categories = require("../models/categories");
+const Products = require("../models/products");
 
 exports.postCategories = async (req, res) => {
     try{
@@ -23,9 +24,10 @@ exports.getCategories = async (req, res) => {
 
 exports.deleteCategories = async (req, res) => {
     try{
-        id = req.query.id
+        let id = req.query.id
+        await Products.deleteMany({'category._id': id})
         await Categories.findByIdAndDelete(id)
-        res.status(200).json({msg: "category removed successfully"})
+        res.status(200).json({msg: 'Category Deleted Successfully'})
     }
     catch(err){
         res.status(404).send(err)
