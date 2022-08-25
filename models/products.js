@@ -29,7 +29,7 @@ const ProductsSchema = mongoose.Schema({
     },
     price: {    
         type: Number,
-        required: true
+        required: true,
     },
     stock: {
         type: Number,
@@ -43,7 +43,7 @@ const ProductsSchema = mongoose.Schema({
 },
     {
         versionKey: false,
-        timestamps: true
+        timestamps: true,
     }
 );
 

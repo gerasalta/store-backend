@@ -6,9 +6,10 @@ const connectDB = async () => {
         await mongoose.connect(
             process.env.DB_MONGO, {
                 useNewUrlParser: true,
-                useUnifiedTopology: true,   
+                useUnifiedTopology: true
             }
         )
+        mongoose.set('autoIndex', false);
     }
     catch(err){
         console.log(err);

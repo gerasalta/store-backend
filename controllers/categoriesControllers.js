@@ -1,6 +1,5 @@
 const Categories = require("../models/categories");
 const Products = require("../models/products");
-const { patch } = require("../routes/products");
 
 exports.postCategories = async (req, res) => {
     try{
