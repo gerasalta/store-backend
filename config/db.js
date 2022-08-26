@@ -9,7 +9,6 @@ const connectDB = async () => {
                 useUnifiedTopology: true
             }
         )
-        mongoose.set('autoIndex', false);
     }
     catch(err){
         console.log(err);
